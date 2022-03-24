@@ -54,5 +54,9 @@ storage=firebase.storage()
 cloud_filename = input("Enter the name of the file you want to download")
 storage.child(cloud_filename).download("", "downloaded.txt")
 
-
+# # Reading file to command line
+cloud_filename = input("Enter the name of the file you want to download")
+url = storage.child(cloud_filename).get_url(None)
+file = urllib.request.urlopen(url).read()
+print(file)
 
