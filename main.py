@@ -68,6 +68,18 @@ db=firebase.database()
 # # Use custom id vs firebase generated one
 # db.child("contacts").child("user_id").set(data)
 
+# Update
+# Use this is you already know the key
+#db.child("contacts").child("user_id").update({"last_name":"James"})
+
+# Get all contacts
+contacts = db.child("contacts").get()
+# Iterate to get values from contacts including userid
+for contact in contacts.each():
+    #print(contact.val())
+    #print(contact.key())
+    if contact.val()['name'] == 'Mark':
+        db.child("contacts").child(contact.key)
 
 
 
