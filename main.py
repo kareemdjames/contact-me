@@ -27,3 +27,14 @@ try:
     print("Successfully signed in")
 except:
     print("Invalid email, or password. Please try again")
+
+# Signup
+email = input("Enter your email")
+password = input("Enter your password")
+confirm_password = input("Please confirm your password")
+if password == confirm_password:
+    try:
+        auth.create_user_with_email_and_password(email, password)
+        print("Success!")
+    except:
+        print('Email already exists, please login with your password')
