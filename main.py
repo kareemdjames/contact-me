@@ -81,16 +81,28 @@ db=firebase.database()
 #     if contact.val()['name'] == 'Mark':
 #         db.child("contacts").child(contact.key)
 
-# Delete
-# If you know the id
-db.child("contacts").child("contact").remove()
-# Specific field
-db.child("contacts").child("contact").child("first_name").remove()
-# If you don't know the id
-contacts = db.child("contacts").get()
-for contact in contacts.each():
-    if contact.val()['first_name'] == 'Ben':
-        db.child("contacts").child(contact.key()).child("age").remove()
+# # Delete
+# # If you know the id
+# db.child("contacts").child("contact").remove()
+# # Specific field
+# db.child("contacts").child("contact").child("first_name").remove()
+# # If you don't know the id
+# contacts = db.child("contacts").get()
+# for contact in contacts.each():
+#     if contact.val()['first_name'] == 'Ben':
+#         db.child("contacts").child(contact.key()).child("age").remove()
+
+# #Read
+# # Get everything
+# #contacts = db.child("contacts").get()
+# #Get single
+# contacts = db.child("contacts").order_by_child("first_name").equal_to("Anna").get()
+# for contact in contacts.each():
+#     print(contact.val()["age"])
+#
+# contacts = db.child("contacts").order_by_child("age").start_at(20).get()
+# for contact in contacts.each():
+#     print(contact.val())
 
 
 
