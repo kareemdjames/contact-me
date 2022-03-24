@@ -1,9 +1,15 @@
 import urllib.request
 
 import pyrebase
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 
 firebase_config = {
-    "apiKey": "AIzaSyAxRQPXM4KwXTaXvG55NZD1ZiAv3kSejrw",
+    "apiKey": API_KEY,
     "authDomain": "contact-me-dcec6.firebaseapp.com",
     "projectId": "contact-me-dcec6",
     "storageBucket": "contact-me-dcec6.appspot.com",
@@ -17,7 +23,7 @@ firebase_config = {
 firebase = pyrebase.initialize_app(firebase_config)
 
 #auth = firebase.auth()
-db=firebase.database()
+#db=firebase.database()
 #storage=firebase.storage()
 
 # Authentication
