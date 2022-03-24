@@ -17,8 +17,8 @@ firebase_config = {
 firebase = pyrebase.initialize_app(firebase_config)
 
 #auth = firebase.auth()
-#db=firebase.database()
-storage=firebase.storage()
+db=firebase.database()
+#storage=firebase.storage()
 
 # Authentication
 # Login
@@ -50,13 +50,24 @@ storage=firebase.storage()
 # # Prints the url of the uploaded file
 # print(storage.child(cloud_filename).get_url(None))
 
-# Download
-cloud_filename = input("Enter the name of the file you want to download")
-storage.child(cloud_filename).download("", "downloaded.txt")
-
+# # Download
+# cloud_filename = input("Enter the name of the file you want to download")
+# storage.child(cloud_filename).download("", "downloaded.txt")
+#
 # # Reading file to command line
-cloud_filename = input("Enter the name of the file you want to download")
-url = storage.child(cloud_filename).get_url(None)
-file = urllib.request.urlopen(url).read()
-print(file)
+# cloud_filename = input("Enter the name of the file you want to download")
+# url = storage.child(cloud_filename).get_url(None)
+# file = urllib.request.urlopen(url).read()
+# print(file)
+
+# # Database
+# # Create
+# # db = root, db.child = child under root
+# data = {"first_name": "Ben", "last_name": "Jackson", "age": 42}
+# db.child("contacts").push(data)
+# # Use custom id vs firebase generated one
+# db.child("contacts").child("user_id").set(data)
+
+
+
 
