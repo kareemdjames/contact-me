@@ -1,3 +1,5 @@
+import urllib.request
+
 import pyrebase
 
 firebase_config = {
@@ -28,7 +30,7 @@ storage=firebase.storage()
 # except:
 #     print("Invalid email, or password. Please try again")
 
-# Signup
+## Signup
 # email = input("Enter your email: ")
 # password = input("Enter your password: ")
 # confirm_password = input("Please confirm your password: ")
@@ -39,10 +41,18 @@ storage=firebase.storage()
 #     except:
 #         print('Email already exists, please login with your password')
 
-# Storage
-filename = input("Enter the name of the file you want to upload: ")
-# You can save the file to a path you specify e.g: \books\poem\cloud_filename. If the path doesn't exsist it will be created.
-cloud_filename = input("Enter the name you want the file in the cloud: ")
-storage.child(cloud_filename).put(filename)
-# Prints the url of the uploaded file
-print(storage.child(cloud_filename).get_url(None))
+# # Storage
+# # Upload
+# filename = input("Enter the name of the file you want to upload: ")
+# # You can save the file to a path you specify e.g: \books\poem\cloud_filename. If the path doesn't exsist it will be created.
+# cloud_filename = input("Enter the name you want the file in the cloud: ")
+# storage.child(cloud_filename).put(filename)
+# # Prints the url of the uploaded file
+# print(storage.child(cloud_filename).get_url(None))
+
+# Download
+cloud_filename = input("Enter the name of the file you want to download")
+storage.child(cloud_filename).download("", "downloaded.txt")
+
+
+
