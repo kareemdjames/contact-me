@@ -205,4 +205,7 @@ while users_input != "q":
         contact_to_delete = input("Enter the contact's first name to delete\n")
         delete_contact(contact_to_delete)
 
+    elif users_input.lower() == "q":
+        break
 
+print("Thank you for using the address book")
