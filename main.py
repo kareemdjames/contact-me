@@ -44,6 +44,7 @@ def login(email, password):
     except:
         print("Invalid email, or password. Please try again")
 
+
 # # Signup
 # email = input("Enter your email: ")
 # password = input("Enter your password: ")
@@ -120,8 +121,19 @@ def create_contact(data):
 # contacts = db.child("contacts").order_by_child("age").start_at(20).get()
 # for contact in contacts.each():
 #     print(contact.val())
+def get_all_contacts():
+    contacts = db.child("contacts").get()
+    for contact in contacts.each():
+        print(contact.val())
 
-users_input = ""
+
+def find_contact(name):
+    contacts = db.child("contacts").order_by_child("first_name").equal_to(name).get()
+    for contact in contacts.each():
+        print(contact.val())
+
+
+users_input = "".lower()
 
 print("Welcome to the address book program")
 
@@ -149,6 +161,17 @@ while users_input != "q":
         address = input("Address = ")
 
         contact = Person(first_name, last_name, age, phone_number, address)
-        data = {"first_name": contact.first_name, "last_name": contact.last_name, "age": contact.age, "phone_number": contact.phone_number, "address": contact.address}
+        data = {"first_name": contact.first_name, "last_name": contact.last_name, "age": contact.age,
+                "phone_number": contact.phone_number, "address": contact.address}
         create_contact(data)
         print("Thank you we have received your contacts information\n")
+
+    elif users_input == "3":
+        get_all_contacts()
+        input("Contacts displayed. Hit enter to continue.")
+
+    elif users_input == "4":
+        contact_to_lookup = input("Enter the contact's first name to lookup \n")
+        find_contact(contact_to_lookup)
+
+
