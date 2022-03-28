@@ -3,6 +3,7 @@ import urllib.request
 import pyrebase
 from dotenv import load_dotenv
 import os
+from Person import *
 
 load_dotenv()
 
@@ -17,14 +18,15 @@ firebase_config = {
     "appId": "1:161600233857:web:154f9535a9fc5ae2774880",
     "measurementId": "G-24YLTCJ9EZ",
     "databaseURL": "https://contact-me-dcec6-default-rtdb.firebaseio.com/"
-
 }
 
 firebase = pyrebase.initialize_app(firebase_config)
 
-#auth = firebase.auth()
-#db=firebase.database()
-#storage=firebase.storage()
+auth = firebase.auth()
+db = firebase.database()
+
+
+# storage=firebase.storage()
 
 # Authentication
 # Login
@@ -35,8 +37,14 @@ firebase = pyrebase.initialize_app(firebase_config)
 #     print("Successfully signed in")
 # except:
 #     print("Invalid email, or password. Please try again")
+def login(email, password):
+    try:
+        auth.sign_in_with_email_and_password(email, password)
+        print("Successfully signed in")
+    except:
+        print("Invalid email, or password. Please try again")
 
-## Signup
+# # Signup
 # email = input("Enter your email: ")
 # password = input("Enter your password: ")
 # confirm_password = input("Please confirm your password: ")
@@ -66,13 +74,16 @@ firebase = pyrebase.initialize_app(firebase_config)
 # file = urllib.request.urlopen(url).read()
 # print(file)
 
-# # Database
-# # Create
-# # db = root, db.child = child under root
-# data = {"first_name": "Ben", "last_name": "Jackson", "age": 42}
+# Database
+# Create
+# db = root, db.child = child under root
+# data = {"first_name": "Karlos", "last_name": "Tempes", "age": 21}
 # db.child("contacts").push(data)
-# # Use custom id vs firebase generated one
+# Use custom id vs firebase generated one
 # db.child("contacts").child("user_id").set(data)
+def create_contact(data):
+    db.child("contacts").push(data)
+
 
 # # Update
 # # Use this is you already know the key
@@ -110,8 +121,34 @@ firebase = pyrebase.initialize_app(firebase_config)
 # for contact in contacts.each():
 #     print(contact.val())
 
+users_input = ""
 
+print("Welcome to the address book program")
 
+while users_input != "q":
+    print("Available options")
+    print("1 - Login")
+    print("2 - Enter a contact")
+    print("3 - Display contacts")
+    print("4 - Find contact")
+    print("q - quit program")
+    users_input = input("Select option: ")
 
+    if users_input == "1":
+        email = input("Enter your email: ")
+        password = input("Enter your password: ")
+        login(email, password)
 
+    elif users_input == "2":
+        print("Enter your contact's information")
 
+        first_name = input("First name = ")
+        last_name = input("Last name = ")
+        age = input("Age = ")
+        phone_number = input("Phone number = ")
+        address = input("Address = ")
+
+        contact = Person(first_name, last_name, age, phone_number, address)
+        data = {"first_name": contact.first_name, "last_name": contact.last_name, "age": contact.age, "phone_number": contact.phone_number, "address": contact.address}
+        create_contact(data)
+        print("Thank you we have received your contacts information\n")
