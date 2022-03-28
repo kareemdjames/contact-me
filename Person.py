@@ -8,3 +8,6 @@ class Person:
 
     def full_name(self):
         print(f'{self.first_name} {self.last_name}')
+
+    def full_contact(self):
+        return f"{self.first_name} {self.last_name} : {self.age} : {self.phone_number} : {self.address}"
