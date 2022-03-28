@@ -99,6 +99,19 @@ def create_contact(data):
 #     if contact.val()['name'] == 'Mark':
 #         db.child("contacts").child(contact.key)
 
+def update_contact(name):
+    is_contact_updated = False
+    contacts = db.child("contacts").get()
+    for contact in contacts.each():
+        if contact.val()['first_name'].lower() == name:
+            print(contact.val())
+            field_to_update = input("We have found the contact, which field would you like to update?\n")
+            update = input("What do you want to update this value to\n")
+            db.child("contacts").child(contact.key()).update({field_to_update: update})
+            print(f"You can successfully updated {name}\n")
+            is_contact_updated = True
+
+
 # # Delete
 # # If you know the id
 # db.child("contacts").child("contact").remove()
@@ -151,7 +164,8 @@ while users_input != "q":
     print("2 - Enter a contact")
     print("3 - Display all contacts")
     print("4 - Find a contact")
-    print("5 - Delete a contact")
+    print("5 - Update a contact")
+    print("6 - Delete a contact")
     print("q - quit program")
     users_input = input("Select option: ")
 
@@ -184,6 +198,11 @@ while users_input != "q":
         find_contact(contact_to_lookup)
 
     elif users_input == "5":
+        contact_to_update = input("Please enter contact's first name to update\n")
+        update_contact(contact_to_update)
+
+    elif users_input == "6":
         contact_to_delete = input("Enter the contact's first name to delete\n")
         delete_contact(contact_to_delete)
+
 
