@@ -109,6 +109,16 @@ def create_contact(data):
 # for contact in contacts.each():
 #     if contact.val()['first_name'] == 'Ben':
 #         db.child("contacts").child(contact.key()).child("age").remove()
+def delete_contact(name):
+    is_contact_deleted = False
+    contacts = db.child("contacts").get()
+    for contact in contacts.each():
+        if contact.val()['first_name'] == name:
+            db.child("contacts").child(contact.key()).remove()
+            is_contact_deleted = True
+            print(f"{name} has been removed from contacts")
+    if not is_contact_deleted:
+        print("No contact with this name found")
 
 # #Read
 # # Get everything
@@ -126,12 +136,10 @@ def get_all_contacts():
     for contact in contacts.each():
         print(contact.val())
 
-
 def find_contact(name):
     contacts = db.child("contacts").order_by_child("first_name").equal_to(name).get()
     for contact in contacts.each():
         print(contact.val())
-
 
 users_input = "".lower()
 
@@ -141,8 +149,9 @@ while users_input != "q":
     print("Available options")
     print("1 - Login")
     print("2 - Enter a contact")
-    print("3 - Display contacts")
-    print("4 - Find contact")
+    print("3 - Display all contacts")
+    print("4 - Find a contact")
+    print("5 - Delete a contact")
     print("q - quit program")
     users_input = input("Select option: ")
 
@@ -171,7 +180,10 @@ while users_input != "q":
         input("Contacts displayed. Hit enter to continue.")
 
     elif users_input == "4":
-        contact_to_lookup = input("Enter the contact's first name to lookup \n")
+        contact_to_lookup = input("Enter the contact's first name to lookup\n")
         find_contact(contact_to_lookup)
 
+    elif users_input == "5":
+        contact_to_delete = input("Enter the contact's first name to delete\n")
+        delete_contact(contact_to_delete)
 
