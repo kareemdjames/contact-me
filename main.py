@@ -126,12 +126,13 @@ def delete_contact(name):
     is_contact_deleted = False
     contacts = db.child("contacts").get()
     for contact in contacts.each():
-        if contact.val()['first_name'] == name:
+        if contact.val()['first_name'].lower() == name.lower():
             db.child("contacts").child(contact.key()).remove()
             is_contact_deleted = True
             print(f"{name} has been removed from contacts")
     if not is_contact_deleted:
         print("No contact with this name found")
+
 
 # #Read
 # # Get everything
@@ -149,14 +150,15 @@ def get_all_contacts():
     for contact in contacts.each():
         print(contact.val())
 
+
 def find_contact(name):
     contacts = db.child("contacts").order_by_child("first_name").equal_to(name).get()
     for contact in contacts.each():
         print(contact.val())
 
-users_input = "".lower()
-
 print("Welcome to the address book program")
+
+users_input = "".lower()
 
 while users_input != "q":
     print("Available options")
@@ -177,11 +179,11 @@ while users_input != "q":
     elif users_input == "2":
         print("Enter your contact's information")
 
-        first_name = input("First name = ")
-        last_name = input("Last name = ")
-        age = input("Age = ")
-        phone_number = input("Phone number = ")
-        address = input("Address = ")
+        first_name = input("First name = ").lower()
+        last_name = input("Last name = ").lower()
+        age = input("Age = ").lower()
+        phone_number = input("Phone number = ").lower()
+        address = input("Address = ").lower()
 
         contact = Person(first_name, last_name, age, phone_number, address)
         data = {"first_name": contact.first_name, "last_name": contact.last_name, "age": contact.age,
@@ -194,15 +196,15 @@ while users_input != "q":
         input("Contacts displayed. Hit enter to continue.")
 
     elif users_input == "4":
-        contact_to_lookup = input("Enter the contact's first name to lookup\n")
+        contact_to_lookup = input("Enter the contact's first name to lookup\n").lower()
         find_contact(contact_to_lookup)
 
     elif users_input == "5":
-        contact_to_update = input("Please enter contact's first name to update\n")
+        contact_to_update = input("Please enter contact's first name to update\n").lower()
         update_contact(contact_to_update)
 
     elif users_input == "6":
-        contact_to_delete = input("Enter the contact's first name to delete\n")
+        contact_to_delete = input("Enter the contact's first name to delete\n").lower()
         delete_contact(contact_to_delete)
 
     elif users_input.lower() == "q":
