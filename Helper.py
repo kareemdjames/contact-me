@@ -44,6 +44,7 @@ def sign_up():
         except:
             print('Email already exists, please login with your password')
 
+
 # CRUD operations
 # Create
 def create_contact(data):
