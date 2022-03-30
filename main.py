@@ -9,20 +9,24 @@ users_input = "".lower()
 while users_input != "q":
     print("Available options")
     print("1 - Login")
-    print("2 - Enter a contact")
-    print("3 - Display all contacts")
-    print("4 - Find a contact")
-    print("5 - Update a contact")
-    print("6 - Delete a contact")
+    print("2 - Sign up")
+    print("3 - Enter a contact")
+    print("4 - Display all contacts")
+    print("5 - Find a contact")
+    print("6 - Update a contact")
+    print("7 - Delete a contact")
     print("q - quit program")
     users_input = input("Select option: ")
 
     if users_input == "1":
-        email = input("Enter your email: ")
+        email = input("Enter your email: ").lower()
         password = input("Enter your password: ")
         login(email, password)
 
-    elif users_input == "2":
+    if users_input == "2":
+        sign_up()
+
+    elif users_input == "3":
         print("Enter your contact's information")
 
         first_name = input("First name = ").lower()
@@ -37,19 +41,19 @@ while users_input != "q":
         create_contact(data)
         print("Thank you we have received your contacts information\n")
 
-    elif users_input == "3":
+    elif users_input == "4":
         get_all_contacts()
         input("Contacts displayed. Hit enter to continue.")
 
-    elif users_input == "4":
+    elif users_input == "5":
         contact_to_lookup = input("Enter the contact's first name to lookup\n").lower()
         find_contact(contact_to_lookup)
 
-    elif users_input == "5":
+    elif users_input == "6":
         contact_to_update = input("Please enter contact's first name to update\n").lower()
         update_contact(contact_to_update)
 
-    elif users_input == "6":
+    elif users_input == "7":
         contact_to_delete = input("Enter the contact's first name to delete\n").lower()
         delete_contact(contact_to_delete)
 

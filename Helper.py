@@ -40,7 +40,7 @@ def sign_up():
     if password == confirm_password:
         try:
             auth.create_user_with_email_and_password(email, password)
-            print("Success!")
+            print(f"Success! You have signed up with {email}")
         except:
             print('Email already exists, please login with your password')
 
